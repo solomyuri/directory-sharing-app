@@ -30,17 +30,23 @@ The following tools are required to run the application:
 - git clone https://github.com/solomyuri/directory-sharing-app
 - cd directory-sharing-app  
 - Run the linux_install.sh script to build and install:
-    - chmod +x linux_install.sh
-    - sudo ./linux_install.sh
-    
+    ```bash
+  chmod +x linux_install.sh
+-
+    ```bash
+  sudo ./linux_install.sh
+
+---
 ## Installation for Windows
 - git clone https://github.com/solomyuri/directory-sharing-app
 - cd directory-sharing-app  
 - Run the windows_install.bat script with administrator privileges
 
 ### Run application
-- dir-share -p <port> -d </path/to/share>
-    - -p default value: 8080
-    - -d default value: current directory
+-
+    ```bash
+      dir-share -p <port> -d </path/to/share>
+-Optional -p, default value: 8080  
+-Optional -d, default value: current directory
 
 ---
