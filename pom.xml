@@ -9,7 +9,7 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.solomyuri</groupId>
-    <artifactId>directory-sharing-appp</artifactId>
+    <artifactId>directory-sharing-app</artifactId>
     <version>1.0.0</version>
     <name>directory-sharing-app</name>
     <description>Directory content sharing utility</description>
