@@ -7,9 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,8 @@ public class SharingServiceImpl implements SharingService {
 
     private final String workingDirectory; 
     
-    public SharingServiceImpl() {
-	this.workingDirectory = System.getProperty("user.dir");
+    public SharingServiceImpl(@Value("${share.directory}") String directory) {
+	this.workingDirectory = directory;
     }
     
     @Override
@@ -54,7 +53,7 @@ public class SharingServiceImpl implements SharingService {
 		Path path = Paths.get(workingDirectory + File.separator + file.getOriginalFilename());
 		Files.write(path, file.getBytes());
 	    } catch (IOException ex) {
-		Logger.getLogger("SharingServiceLogger").log(Level.WARNING, ex.getMessage());
+		System.err.println(ex.getMessage());
 	    }
 	}
     }
