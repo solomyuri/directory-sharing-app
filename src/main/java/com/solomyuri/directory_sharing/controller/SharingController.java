@@ -1,8 +1,10 @@
 package com.solomyuri.directory_sharing.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,7 @@ public class SharingController {
     @GetMapping("/download/{filename}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
 	return ResponseEntity.ok()
-	        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+	        .header(HttpHeaders.CONTENT_DISPOSITION, produceContentFilename(filename))
 	        .body(sharingService.download(filename));
     }
 
@@ -41,5 +43,11 @@ public class SharingController {
     public String uploadFile(@RequestParam MultipartFile file) throws IOException {
 	sharingService.upload(file);
 	return "redirect:/";
+    }
+    
+    private String produceContentFilename(String filename) {
+	return ContentDisposition.attachment()
+	        .filename(filename, StandardCharsets.UTF_8)
+	        .toString();
     }
 }
