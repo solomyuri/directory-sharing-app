@@ -40,8 +40,10 @@ public class SharingController {
     }
 
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam MultipartFile file) throws IOException {
-	sharingService.upload(file);
+    public String uploadFile(@RequestParam MultipartFile file,
+                             @RequestParam("offset") long offset,
+                             @RequestParam("totalSize") long totalSize) throws IOException {
+	sharingService.upload(file, offset, totalSize);
 	return "redirect:/";
     }
     

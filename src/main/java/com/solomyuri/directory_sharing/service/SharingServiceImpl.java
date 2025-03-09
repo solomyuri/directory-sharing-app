@@ -1,8 +1,8 @@
 package com.solomyuri.directory_sharing.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -47,11 +47,11 @@ public class SharingServiceImpl implements SharingService {
     }
 
     @Override
-    public void upload(MultipartFile file) {
+    public void upload(MultipartFile file, long offset, long totalSize) {
 	if (!file.isEmpty()) {
-	    try {
-		Path path = Paths.get(workingDirectory + File.separator + file.getOriginalFilename());
-		Files.write(path, file.getBytes());
+	    Path path = Paths.get(workingDirectory + File.separator + file.getOriginalFilename());
+	    try (FileOutputStream fos = new FileOutputStream(path.toFile(), true)) {
+		fos.write(file.getBytes());
 	    } catch (IOException ex) {
 		System.err.println(ex.getMessage());
 	    }

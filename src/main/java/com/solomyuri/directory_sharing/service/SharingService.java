@@ -11,6 +11,6 @@ public interface SharingService {
 
     Resource download(String filename);
     
-    void upload(MultipartFile filel);
+    void upload(MultipartFile filel, long offset, long totalSize);
 
 }
